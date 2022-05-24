@@ -84,7 +84,6 @@ namespace ApiEstacionamento.Data.Repository.CarteiraVirtual
                 _context.Dispose();
             }
         }
-
         public async Task<string> TransferenciaEntradaCarteiraVirtual(TransferenciaEntradaCarteiraVirtual model)
         {
             try
@@ -107,7 +106,6 @@ namespace ApiEstacionamento.Data.Repository.CarteiraVirtual
                 _context.Dispose();
             }
         }
-
         public async Task<string> TransferenciaSaidaCarteiraVirtual(TransferenciaEntradaCarteiraVirtual model)
         {
             try

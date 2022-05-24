@@ -13,8 +13,8 @@ namespace ApiEstacionamento.Data.Context
         {
         }
 
-        public DbSet<LoginModel> Logins { get; set; }
-        public DbSet<Carro> Carros { get; set; }
+        public DbSet<LoginModel> Logins { get; set; } //Tabela de Login
+        public DbSet<Carro> Carros { get; set; } //Tabela de carros
         public DbSet<CarteiraVirtual> CarteirasVirtuais { get; set; }
         public DbSet<Estacionamento> Estacionamentos { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
