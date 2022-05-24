@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Repository\Reserva\" />
+    <Folder Include="Data\Repository\Veiculos\" />
     <Folder Include="Interface\IFormaPagamento\" />
-    <Folder Include="Interface\IEstacionamento\" />
     <Folder Include="Interface\IPagamento\" />
     <Folder Include="Interface\IReserva\" />
     <Folder Include="Interface\IVeiculos\" />

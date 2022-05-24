@@ -1,12 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApiEstacionamento.Entities
+﻿namespace ApiEstacionamento.Model
 {
-    public class Estacionamento
+    public class EstacionamentoUpdateModel
     {
-        [Key]
         public int Id_Estacionamento { get; set; }
-        public int User_Id { get; set; }  
         public string Nome_Estacionamento { get; set; }
         public string Cnpj { get; set; }
         public string Local { get; set; }
@@ -15,8 +11,5 @@ namespace ApiEstacionamento.Entities
         public bool Seguro { get; set; }
         public bool Chave { get; set; }
         public string Telefone { get; set; }
-        public string Data_Cadastro { get; set; }
-        public virtual LoginModel Usuario { get; set; }
-        public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }

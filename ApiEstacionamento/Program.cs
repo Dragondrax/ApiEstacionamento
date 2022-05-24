@@ -1,7 +1,9 @@
 using ApiEstacionamento.Data.Context;
 using ApiEstacionamento.Data.Repository.CarteiraVirtual;
+using ApiEstacionamento.Data.Repository.Estacionamento;
 using ApiEstacionamento.Data.Repository.Login;
 using ApiEstacionamento.Interface.ICarteiraVirtual;
+using ApiEstacionamento.Interface.IEstacionamento;
 using ApiEstacionamento.Interface.ILogin;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -20,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connecti
 
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<ICarteiraVirtual, CarteiraVirtualRepository>();
+builder.Services.AddScoped<IEstacionamentoRepository, EstacionamentoRepository>();
 
 var app = builder.Build();
 

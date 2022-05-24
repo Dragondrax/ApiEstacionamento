@@ -1,4 +1,5 @@
-﻿using ApiEstacionamento.Model;
+﻿using ApiEstacionamento.Interface.IEstacionamento;
+using ApiEstacionamento.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEstacionamento.Controllers
@@ -7,30 +8,54 @@ namespace ApiEstacionamento.Controllers
     [Route("/api")]
     public class EstacionamentoController : Controller
     {
-        public EstacionamentoController()
+        private readonly IEstacionamentoRepository _repository;
+        public EstacionamentoController(IEstacionamentoRepository repository)
         {
-
+            _repository = repository;
         }
 
         [HttpPost]
         [Route("Estacionamento")]
-        public IActionResult RegisterEstacionamento([FromBody] Estacionamento model)
+        public async Task<IActionResult> RegisterEstacionamento([FromBody] EstacionamentoCreateModel model)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.EstacionamentoCreate(model);
+            if (result == "Criado com Sucesso!")
+                return Ok(new { message = "Cadastro Efetuado com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpGet]
-        [Route("Estacionamento")]
-        public IActionResult ReadEstacionamento()
+        [Route("EstacionamentoEspecifico")]
+        public async Task<IActionResult> EstacionamentoReadEspecifico(int EstacionamentoId)
         {
-            return Ok("");
+            var result = await _repository.EstacionamentoReadEspecifico(EstacionamentoId);
+            if (result != null)
+                return Ok(result);
+            return BadRequest(new {message="Ops parece que houve um problema, tente novamente mais tarde!"});
+        }
+
+        [HttpGet]
+        [Route("EstacionamentoGeral")]
+        public async Task<IActionResult> EstacionamentoReadGeral()
+        {
+            var result = await _repository.EstacionamentoReadGeral();
+            if (result != null)
+                return Ok(result);
+            return BadRequest(new { message = "Ops parece que houve um problema, tente novamente mais tarde!" });
         }
 
         [HttpPut]
         [Route("Estacionamento")]
-        public IActionResult UpdateEstacionamento([FromBody] Estacionamento model)
+        public async Task<IActionResult> UpdateEstacionamento([FromBody] EstacionamentoUpdateModel model)
         {
-            return Ok("");
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.EstacionamentoUpdate(model);
+            if (result == "Alteracoes Efetuadas Com Sucesso")
+                return Ok(new { message = "Cadastro Atualizado com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpDelete]

@@ -38,7 +38,7 @@ namespace ApiEstacionamento.Data.Repository.CarteiraVirtual
                     user_id = model.Id_Usuario,
                     Creditos = model.Credito
                 };
-                _context.CarteirasVirtuais.AddAsync(result);
+                await _context.CarteirasVirtuais.AddAsync(result);
                 _context.SaveChanges();
                 return "Sucesso";
             }
