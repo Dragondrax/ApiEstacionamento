@@ -42,7 +42,7 @@ namespace ApiEstacionamento.Data.Repository.Login
             }
         }
 
-        public async Task<bool> Login(string Email, string Senha)
+        public IEnumerable<LoginResultModel> Login(string Email, string Senha)
         {
             try
             {
@@ -51,20 +51,28 @@ namespace ApiEstacionamento.Data.Repository.Login
                              where c1.Login == Email && c1.Password == Senha
                              select c1;
 
+                if (access.Count() == 1)
+                {
+                    var result = from c1 in _context.Logins
+                                 join c2 in _context.CarteirasVirtuais on c1.Id_User equals c2.user_id
+                                 join c3 in _context.Carros on c1.Id_User equals c3.User_Id
+
+                                 select new LoginResultModel
+                                 {
+                                     User_Id = c1.Id_User,
+                                     Name = c1.Nome,
+                                     Carteira_Id = c2.carteira_id,
+                                     Carro_Id = c3.Id_Carro
+                                 };
+                    return result;
+                }
                 _context.Connection.Close();
-
-                if(access.Count() == 1)
-                    return true;
-
-                return false;
+                return null;
+                    
             }
             catch (Exception ex)
             {
-                return false;
-            }
-            finally
-            {
-                _context.Dispose();
+                return null;
             }
         }
 

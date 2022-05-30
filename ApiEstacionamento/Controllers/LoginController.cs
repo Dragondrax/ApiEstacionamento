@@ -28,15 +28,15 @@ namespace ApiEstacionamento.Controllers
         }
         [HttpGet]
         [Route("Usuario")]
-        public async Task<IActionResult> LogarUsuario(string Login, string Senha)
+        public IActionResult LogarUsuario(string Login, string Senha)
         {
             if (!ModelState.IsValid)
                 return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
             var senhaCriptografada = encripty.GerarHashSha256(Senha);
 
-            var access = await _login.Login(Login, senhaCriptografada);
-            if(access)
-                return Ok("Usuário Logado");
+            var access = _login.Login(Login, senhaCriptografada);
+            if(access != null)
+                return Ok(access);
 
             return Ok("Usuário ou Senha Inválidos");
         }

@@ -1,4 +1,5 @@
-﻿using ApiEstacionamento.Model;
+﻿using ApiEstacionamento.Interface.IVeiculos;
+using ApiEstacionamento.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEstacionamento.Controllers
@@ -7,37 +8,54 @@ namespace ApiEstacionamento.Controllers
     [Route("/api")]
     public class VeiculosController : Controller
     {
-        public VeiculosController()
+        private readonly IVeiculosRepository _repository;
+        public VeiculosController(IVeiculosRepository repository)
         {
-
+            _repository = repository;
         }
 
         [HttpPost]
         [Route("Veiculos")]
-        public IActionResult RegisterReserva([FromBody] Carro model)
+        public async Task<IActionResult> RegisterVeiculos([FromBody] VeiculoCreateModel model)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.CreateVeiculos(model);
+            if(result == "Dados Criados com Sucesso")
+                return Ok(new { message = "Cadastro Efetuado com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpGet]
         [Route("Veiculos")]
-        public IActionResult ReadReserva()
+        public async Task<IActionResult> ReadVeiculos(int Id_User)
         {
-            return Ok("");
+            var result = _repository.ReadVeiculosPorDono(Id_User);
+            if (result != null)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPut]
         [Route("Veiculos")]
-        public IActionResult UpdateReserva([FromBody] Carro model)
+        public async Task<IActionResult> UpdateVeiculos([FromBody] VeiculoUpdateModel model)
         {
-            return Ok("");
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.UpdateVeiculos(model);
+            if (result == "Dados Atualizados com Sucesso")
+                return Ok(new { message = "Cadastro Atualizado com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpDelete]
         [Route("Veiculos")]
-        public IActionResult DeleteReserva(Guid Id)
+        public async Task<IActionResult> DeleteVeiculos(int Id)
         {
-            return Ok("");
+            var result = await _repository.DeleteVeiculos(Id);
+            if(result == "Deletado")
+                return Ok(new { message = "Cadastro Deletado com Sucesso!" });
+            return BadRequest(result);
         }
     }
 }

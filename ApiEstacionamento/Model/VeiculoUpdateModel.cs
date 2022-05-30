@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApiEstacionamento.Entities
+﻿namespace ApiEstacionamento.Model
 {
-    public class Carro
+    public class VeiculoUpdateModel
     {
-        [Key]
         public int Id_Carro { get; set; }
         public int User_Id { get; set; }
         public string Placa { get; set; }
         public string Modelo { get; set; }
         public string Situacao_Carro { get; set; }
         public bool Seguro { get; set; }
+        public string Tipo_Veiculo { get; set; }
         public string Fabricante { get; set; }
         public int Ano_Fabricacao { get; set; }
-        public virtual LoginModel Usuario { get; set; }
-        public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using ApiEstacionamento.Model;
+﻿using ApiEstacionamento.Data.Context;
+using ApiEstacionamento.Interface.IReserva;
+using ApiEstacionamento.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEstacionamento.Controllers
@@ -7,9 +9,10 @@ namespace ApiEstacionamento.Controllers
     [Route("/api")]
     public class ReservaController : Controller
     {
-        public ReservaController()
+        private readonly IReservaRepository _repository;
+        public ReservaController(IReservaRepository _repository)
         {
-
+            _repository = _repository;
         }
 
         [HttpPost]
