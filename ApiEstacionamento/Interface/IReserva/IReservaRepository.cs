@@ -5,8 +5,8 @@ namespace ApiEstacionamento.Interface.IReserva
     public interface IReservaRepository
     {
         public Task<string> CreateReserva(ReservaCreateModel model);
-        public Task<string> ReadReserva();
-        public Task<string> UpdateReserva();
-        public Task<string> DeleteReserva();
+        public IEnumerable<ReservaReadModel> ReadReserva(int IdUser);
+        public Task<string> UpdateReserva(ReservaUpdateModel model);
+        public Task<string> DeleteReserva(int IdReserva);
     }
 }

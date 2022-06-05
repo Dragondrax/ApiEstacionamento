@@ -10,37 +10,53 @@ namespace ApiEstacionamento.Controllers
     public class ReservaController : Controller
     {
         private readonly IReservaRepository _repository;
-        public ReservaController(IReservaRepository _repository)
+        public ReservaController(IReservaRepository repository)
         {
-            _repository = _repository;
+            _repository = repository;
         }
 
         [HttpPost]
         [Route("Reservas")]
-        public IActionResult RegisterReserva([FromBody] Reserva model)
+        public async Task<IActionResult> RegisterReserva([FromBody] ReservaCreateModel model)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.CreateReserva(model);
+            if (result == "Reserva Criada com Sucesso")
+                return Ok(new { message = "Reserva Efetuado com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpGet]
         [Route("Reservas")]
-        public IActionResult ReadReserva()
+        public IActionResult ReadReserva(int IdUser)
         {
-            return Ok("");
+            var result = _repository.ReadReserva(IdUser);
+            if (result != null)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPut]
         [Route("Reservas")]
-        public IActionResult UpdateReserva([FromBody] Reserva model)
+        public async Task<IActionResult> UpdateReserva([FromBody] ReservaUpdateModel model)
         {
-            return Ok("");
+            if (!ModelState.IsValid)
+                return BadRequest($"Alguma coisa falhou :( \n Tente Novamente");
+            var result = await _repository.UpdateReserva(model);
+            if (result == "Reserva Atualizada com Sucesso")
+                return Ok(new { message = "Reserva Atualizada com Sucesso!" });
+            return BadRequest(result);
         }
 
         [HttpDelete]
         [Route("Reservas")]
-        public IActionResult DeleteReserva(Guid Id)
+        public async Task<IActionResult> DeleteReserva(int IdReserva)
         {
-            return Ok("");
+            var result = await _repository.DeleteReserva(IdReserva);
+            if (result == "Deletado com Sucesso!")
+                return Ok(result);
+            return BadRequest(result);
         }
     }
 }

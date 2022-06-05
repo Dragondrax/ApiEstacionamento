@@ -1,7 +1,8 @@
 ﻿namespace ApiEstacionamento.Model
 {
-    public class ReservaCreateModel
+    public class ReservaUpdateModel
     {
+        public int Id_Reserva { get; set; }
         public int Estacionamento_Id { get; set; }
         public int Usuario_Id { get; set; }
         public int Carro_Id { get; set; }

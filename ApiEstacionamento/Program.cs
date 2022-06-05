@@ -19,6 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddAutoMapper(typeof(VeiculoProfiler));
+builder.Services.AddAutoMapper(typeof(ReservaProfiler));
+builder.Services.AddAutoMapper(typeof(VeiculoProfilerUpdate));
+builder.Services.AddAutoMapper(typeof(ReservaProfilerUpdate));
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

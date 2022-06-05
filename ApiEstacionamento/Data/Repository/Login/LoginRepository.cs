@@ -56,6 +56,7 @@ namespace ApiEstacionamento.Data.Repository.Login
                     var result = from c1 in _context.Logins
                                  join c2 in _context.CarteirasVirtuais on c1.Id_User equals c2.user_id
                                  join c3 in _context.Carros on c1.Id_User equals c3.User_Id
+                                 where c1.Login == Email
 
                                  select new LoginResultModel
                                  {
