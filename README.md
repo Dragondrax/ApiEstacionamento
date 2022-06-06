@@ -8,7 +8,10 @@
 https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 <br/>
 
-<p> Posteriormente você precisara dar o comando git clone https://github.com/Dragondrax/ApiEstacionamento.git em uma pasta no seu computador, para você conseguir fazer isso. Você tem que ter o git instalado em sua máquina. </p>
+<p> Posteriormente você precisara dar o comando: 
+  git clone https://github.com/Dragondrax/ApiEstacionamento.git 
+  
+ em uma pasta no seu computador, para você conseguir fazer isso. Você tem que ter o git instalado em sua máquina. </p>
 <br/>
 
 https://git-scm.com/downloads
