@@ -25,7 +25,7 @@ https://go.microsoft.com/fwlink/?linkid=866658
 
 <p> Olha que legal, agora ja temos o nosso banco de dados configurado, lembre-se que é necessário que vc habilite o usuário SA e salve a senha que você configurar nele ok? </p>
 
-<p> Agora estamos com a base do projeto pronto, abra o projeto no seu visual studio. Procure o arquivo appsettings.json e altere o Data Source=SEU COMPUTADOR; PASSWORD=SUA SENHA; User Id=sa </p>
+<p> Agora estamos com a base do projeto pronto, abra o projeto no seu visual studio. Procure o arquivo appsettings.json e altere o Data Source=SEU DATABASE; PASSWORD=SUA SENHA; User Id=sa </p>
 
 Posteriormente a isso abra o seu Sql Server Managament Studio, crie uma nova consulta e exexute o script abaixo:
 
